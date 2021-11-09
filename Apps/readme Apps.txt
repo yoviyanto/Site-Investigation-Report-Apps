@@ -1,0 +1,1 @@
+--Lolipop for user that use android Lolipop version or below
