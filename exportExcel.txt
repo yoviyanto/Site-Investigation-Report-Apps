@@ -1,0 +1,1234 @@
+package com.example.app3;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Button button=findViewById(R.id.ExelWrite);
+        button.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        Workbook wb=new HSSFWorkbook();
+        Cell cell=null;
+
+        HSSFFont boldText= (HSSFFont) wb.createFont();
+        boldText.setBold(true);
+
+        CellStyle alignCenter=wb.createCellStyle();
+        alignCenter.setAlignment(HorizontalAlignment.CENTER);
+        alignCenter.setVerticalAlignment(VerticalAlignment.CENTER);
+        alignCenter.setBorderTop(BorderStyle.MEDIUM);
+        alignCenter.setBorderBottom(BorderStyle.MEDIUM);
+        alignCenter.setBorderRight(BorderStyle.MEDIUM);
+        alignCenter.setBorderLeft(BorderStyle.MEDIUM);
+
+        CellStyle alignCenterBold=wb.createCellStyle();
+        alignCenterBold.setFont(boldText);
+        alignCenterBold.setAlignment(HorizontalAlignment.CENTER);
+        alignCenterBold.setVerticalAlignment(VerticalAlignment.CENTER);
+        alignCenterBold.setBorderTop(BorderStyle.MEDIUM);
+        alignCenterBold.setBorderBottom(BorderStyle.MEDIUM);
+        alignCenterBold.setBorderRight(BorderStyle.MEDIUM);
+        alignCenterBold.setBorderLeft(BorderStyle.MEDIUM);
+
+        CellStyle cellOrange=wb.createCellStyle();
+        cellOrange.setFillForegroundColor(HSSFColor.LIGHT_ORANGE.index);
+        cellOrange.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+        cellOrange.setAlignment(HorizontalAlignment.CENTER);
+        cellOrange.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellOrange.setBorderTop(BorderStyle.MEDIUM);
+        cellOrange.setBorderBottom(BorderStyle.MEDIUM);
+        cellOrange.setBorderRight(BorderStyle.MEDIUM);
+        cellOrange.setBorderLeft(BorderStyle.MEDIUM);
+
+        CellStyle cellOrangeBold=wb.createCellStyle();
+        cellOrangeBold.setFont(boldText);
+        cellOrangeBold.setFillForegroundColor(HSSFColor.LIGHT_ORANGE.index);
+        cellOrangeBold.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+        cellOrangeBold.setAlignment(HorizontalAlignment.CENTER);
+        cellOrangeBold.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellOrangeBold.setBorderTop(BorderStyle.MEDIUM);
+        cellOrangeBold.setBorderBottom(BorderStyle.MEDIUM);
+        cellOrangeBold.setBorderRight(BorderStyle.MEDIUM);
+        cellOrangeBold.setBorderLeft(BorderStyle.MEDIUM);
+
+        CellStyle cellYellowBold=wb.createCellStyle();
+        cellYellowBold.setFont(boldText);
+        cellYellowBold.setFillForegroundColor(HSSFColor.YELLOW.index);
+        cellYellowBold.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+        cellYellowBold.setAlignment(HorizontalAlignment.CENTER);
+        cellYellowBold.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellYellowBold.setBorderTop(BorderStyle.MEDIUM);
+        cellYellowBold.setBorderBottom(BorderStyle.MEDIUM);
+        cellYellowBold.setBorderRight(BorderStyle.MEDIUM);
+        cellYellowBold.setBorderLeft(BorderStyle.MEDIUM);
+
+        CellStyle cellGreen=wb.createCellStyle();
+        cellGreen.setFillForegroundColor(HSSFColor.LIME.index);
+        cellGreen.setAlignment(HorizontalAlignment.CENTER);
+        cellGreen.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellGreen.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+        cellGreen.setBorderTop(BorderStyle.MEDIUM);
+        cellGreen.setBorderBottom(BorderStyle.MEDIUM);
+        cellGreen.setBorderRight(BorderStyle.MEDIUM);
+        cellGreen.setBorderLeft(BorderStyle.MEDIUM);
+
+        CellStyle cellGreenBold=wb.createCellStyle();
+        cellGreenBold.setFont(boldText);
+        cellGreenBold.setFillForegroundColor(HSSFColor.LIME.index);
+        cellGreenBold.setAlignment(HorizontalAlignment.CENTER);
+        cellGreenBold.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellGreenBold.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+        cellGreenBold.setBorderTop(BorderStyle.MEDIUM);
+        cellGreenBold.setBorderBottom(BorderStyle.MEDIUM);
+        cellGreenBold.setBorderRight(BorderStyle.MEDIUM);
+        cellGreenBold.setBorderLeft(BorderStyle.MEDIUM);
+
+        CellStyle cellBlue=wb.createCellStyle();
+        cellBlue.setFillForegroundColor(HSSFColor.TURQUOISE.index);
+        cellBlue.setAlignment(HorizontalAlignment.CENTER);
+        cellBlue.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellBlue.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+        cellBlue.setBorderTop(BorderStyle.MEDIUM);
+        cellBlue.setBorderBottom(BorderStyle.MEDIUM);
+        cellBlue.setBorderRight(BorderStyle.MEDIUM);
+        cellBlue.setBorderLeft(BorderStyle.MEDIUM);
+
+        CellStyle cellBlueBold=wb.createCellStyle();
+        cellBlueBold.setFont(boldText);
+        cellBlueBold.setFillForegroundColor(HSSFColor.TURQUOISE.index);
+        cellBlueBold.setAlignment(HorizontalAlignment.CENTER);
+        cellBlueBold.setVerticalAlignment(VerticalAlignment.CENTER);
+        cellBlueBold.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+        cellBlueBold.setBorderTop(BorderStyle.MEDIUM);
+        cellBlueBold.setBorderBottom(BorderStyle.MEDIUM);
+        cellBlueBold.setBorderRight(BorderStyle.MEDIUM);
+        cellBlueBold.setBorderLeft(BorderStyle.MEDIUM);
+
+        //Now we are creating sheet//////////////////////////////////
+        Sheet sheet=null;
+        sheet = wb.createSheet("LTE 2100");
+
+        //Now column and row/////////////////////////////////////////
+        Row row =sheet.createRow(1);
+        //
+        cell=row.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(1,1,1,8));
+        cell.setCellValue("SITE INVESTIGATION");
+        cell.setCellStyle(cellYellowBold);
+
+        sheet.setColumnWidth(1,(10*200));
+        sheet.setColumnWidth(2,(10*200));
+        sheet.setColumnWidth(3,(10*300));
+        sheet.setColumnWidth(4,(10*200));
+        sheet.setColumnWidth(5,(10*200));
+        sheet.setColumnWidth(6,(10*300));
+        sheet.setColumnWidth(7,(10*800));
+        sheet.setColumnWidth(8,(10*600));
+
+        //Now column and row/////////////////////////////////////////
+        Row row2 =sheet.createRow(2);
+        //
+        cell=row2.createCell(1);
+        cell.setCellValue("Site ID");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row2.createCell(2);
+        sheet.addMergedRegion(new CellRangeAddress(2,2,2,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row2.createCell(4);
+        cell.setCellValue("Site Name");
+        cell.setCellStyle(alignCenter);
+
+        //
+        cell=row2.createCell(5);
+        sheet.addMergedRegion(new CellRangeAddress(2,2,5,8));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row///////////////////////////////////////
+        Row row3 =sheet.createRow(3);
+        //
+        cell=row3.createCell(1);
+        cell.setCellValue("Longitude");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row3.createCell(2);
+        sheet.addMergedRegion(new CellRangeAddress(3,3,2,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row3.createCell(4);
+        cell.setCellValue("Latitude");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row3.createCell(5);
+        sheet.addMergedRegion(new CellRangeAddress(3,3,5,8));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row4 =sheet.createRow(4);
+        //
+        cell=row4.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(4,4,1,3));
+        cell.setCellValue("SECTOR");
+        cell.setCellStyle(alignCenterBold);
+        //
+        cell=row4.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(4,4,4,5));
+        cell.setCellValue("1");
+        cell.setCellStyle(alignCenterBold);
+        //
+        cell=row4.createCell(6);
+        sheet.addMergedRegion(new CellRangeAddress(4,4,6,7));
+        cell.setCellValue("2");
+        cell.setCellStyle(alignCenterBold);
+        //
+        cell=row4.createCell(8);
+        cell.setCellValue("3");
+        cell.setCellStyle(alignCenterBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row5 =sheet.createRow(5);
+        //
+        cell=row5.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(5,12,1,1));
+        cell.setCellValue("Antenna");
+        cell.setCellStyle(alignCenterBold);
+        //
+        cell=row5.createCell(2);
+        sheet.addMergedRegion(new CellRangeAddress(5,5,2,3));
+        cell.setCellValue("Orientation(°) Before");
+        cell.setCellStyle(cellGreen);
+        //
+        cell=row5.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(5,5,4,5));
+        cell.setCellValue("");
+        cell.setCellStyle(cellGreen);
+        //
+        cell=row5.createCell(6);
+        sheet.addMergedRegion(new CellRangeAddress(5,5,6,7));
+        cell.setCellValue("");
+        cell.setCellStyle(cellGreen);
+        //
+        cell=row5.createCell(8);
+        cell.setCellValue("");
+        cell.setCellStyle(cellGreen);
+
+        //Now column and row////////////////////////////////////////
+        Row row6 =sheet.createRow(6);
+        //
+        cell=row6.createCell(2);
+        sheet.addMergedRegion(new CellRangeAddress(6,6,2,3));
+        cell.setCellValue("Orientation(°) After");
+        cell.setCellStyle(cellGreen);
+        //
+        cell=row6.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(6,6,4,5));
+        cell.setCellValue("");
+        cell.setCellStyle(cellGreen);
+        //
+        cell=row6.createCell(6);
+        sheet.addMergedRegion(new CellRangeAddress(6,6,6,7));
+        cell.setCellValue("");
+        cell.setCellStyle(cellGreen);
+        //
+        cell=row6.createCell(8);
+        cell.setCellValue("");
+        cell.setCellStyle(cellGreen);
+
+        //Now column and row////////////////////////////////////////
+        Row row7 =sheet.createRow(7);
+        //
+        cell=row7.createCell(2);
+        sheet.addMergedRegion(new CellRangeAddress(7,7,2,3));
+        cell.setCellValue("Mech Tilt(°) Before");
+        cell.setCellStyle(cellBlue);
+        //
+        cell=row7.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(7,7,4,5));
+        cell.setCellValue("");
+        cell.setCellStyle(cellBlue);
+        //
+        cell=row7.createCell(6);
+        sheet.addMergedRegion(new CellRangeAddress(7,7,6,7));
+        cell.setCellValue("");
+        cell.setCellStyle(cellBlue);
+        //
+        cell=row7.createCell(8);
+        cell.setCellValue("");
+        cell.setCellStyle(cellBlue);
+
+        //Now column and row////////////////////////////////////////
+        Row row8 =sheet.createRow(8);
+        //
+        cell=row8.createCell(2);
+        sheet.addMergedRegion(new CellRangeAddress(8,8,2,3));
+        cell.setCellValue("Mech Tilt(°) After");
+        cell.setCellStyle(cellBlue);
+        //
+        cell=row8.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(8,8,4,5));
+        cell.setCellValue("");
+        cell.setCellStyle(cellBlue);
+        //
+        cell=row8.createCell(6);
+        sheet.addMergedRegion(new CellRangeAddress(8,8,6,7));
+        cell.setCellValue("");
+        cell.setCellStyle(cellBlue);
+        //
+        cell=row8.createCell(8);
+        cell.setCellValue("");
+        cell.setCellStyle(cellBlue);
+
+        //Now column and row////////////////////////////////////////
+        Row row9 =sheet.createRow(9);
+        //
+        cell=row9.createCell(2);
+        sheet.addMergedRegion(new CellRangeAddress(9,9,2,3));
+        cell.setCellValue("Elect Tilt(°) Before");
+        cell.setCellStyle(cellOrange);
+        //
+        cell=row9.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(9,9,4,5));
+        cell.setCellValue("");
+        cell.setCellStyle(cellOrange);
+        //
+        cell=row9.createCell(6);
+        sheet.addMergedRegion(new CellRangeAddress(9,9,6,7));
+        cell.setCellValue("");
+        cell.setCellStyle(cellOrange);
+        //
+        cell=row9.createCell(8);
+        cell.setCellValue("");
+        cell.setCellStyle(cellOrange);
+
+        //Now column and row////////////////////////////////////////
+        Row row10 =sheet.createRow(10);
+        //
+        cell=row10.createCell(2);
+        sheet.addMergedRegion(new CellRangeAddress(10,10,2,3));
+        cell.setCellValue("Elect Tilt(°) After");
+        cell.setCellStyle(cellOrange);
+        //
+        cell=row10.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(10,10,4,5));
+        cell.setCellValue("");
+        cell.setCellStyle(cellOrange);
+        //
+        cell=row10.createCell(6);
+        sheet.addMergedRegion(new CellRangeAddress(10,10,6,7));
+        cell.setCellValue("");
+        cell.setCellStyle(cellOrange);
+        //
+        cell=row10.createCell(8);
+        cell.setCellValue("");
+        cell.setCellStyle(cellOrange);
+
+        //Now column and row////////////////////////////////////////
+        Row row11 =sheet.createRow(11);
+        //
+        cell=row11.createCell(2);
+        sheet.addMergedRegion(new CellRangeAddress(11,11,2,3));
+        cell.setCellValue("Model");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row11.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(11,11,4,5));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row11.createCell(6);
+        sheet.addMergedRegion(new CellRangeAddress(11,11,6,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row11.createCell(8);
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row12 =sheet.createRow(12);
+        //
+        cell=row12.createCell(2);
+        sheet.addMergedRegion(new CellRangeAddress(12,12,2,3));
+        cell.setCellValue("Antenna Height(M)");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row12.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(12,12,4,5));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row12.createCell(6);
+        sheet.addMergedRegion(new CellRangeAddress(12,12,6,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row12.createCell(8);
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row13 =sheet.createRow(13);
+        //
+        cell=row13.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(13,13,1,3));
+        cell.setCellValue("Tower High");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row13.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(13,13,4,5));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row13.createCell(6);
+        sheet.addMergedRegion(new CellRangeAddress(13,13,6,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row13.createCell(8);
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+
+
+
+        //Now column and row////////////////////////////////////////
+        Row row15 =sheet.createRow(15);
+        //
+        cell=row15.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(15,15,1,4));
+        cell.setCellValue("Full Tower");
+        cell.setCellStyle(cellYellowBold);
+        //
+        cell=row15.createCell(5);
+        sheet.addMergedRegion(new CellRangeAddress(15,15,5,7));
+        cell.setCellValue("Coordinate Location");
+        cell.setCellStyle(cellYellowBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row16 =sheet.createRow(16);
+        //
+        cell=row16.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(16,33,1,4));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row16.createCell(5);
+        sheet.addMergedRegion(new CellRangeAddress(16,33,5,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row34 =sheet.createRow(34);
+        //
+        cell=row34.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(34,34,1,7));
+        cell.setCellValue("Full Antenna");
+        cell.setCellStyle(cellYellowBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row35 =sheet.createRow(35);
+        //
+        cell=row35.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(35,35,1,3));
+        cell.setCellValue("Sector 1");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row35.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(35,35,4,6));
+        cell.setCellValue("Sector 2");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row35.createCell(7);
+        cell.setCellValue("Sector 3");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row36 =sheet.createRow(36);
+        //
+        cell=row36.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(36,45,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row36.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(36,45,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row36.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(36,45,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+
+
+
+        //Now column and row////////////////////////////////////////
+        Row row48 =sheet.createRow(48);
+        //
+        cell=row48.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(48,48,1,7));
+        cell.setCellValue("Azimuth Antenna Before");
+        cell.setCellStyle(cellGreenBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row49 =sheet.createRow(49);
+        //
+        cell=row49.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(49,49,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row49.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(49,49,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row49.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row50 =sheet.createRow(50);
+        //
+        cell=row50.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(50,59,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row50.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(50,59,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row50.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(50,59,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row60 =sheet.createRow(60);
+        //
+        cell=row60.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(60,60,1,7));
+        cell.setCellValue("Azimuth Antenna After");
+        cell.setCellStyle(cellGreenBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row61 =sheet.createRow(61);
+        //
+        cell=row61.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(61,61,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row61.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(61,61,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row61.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row62 =sheet.createRow(62);
+        //
+        cell=row62.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(62,71,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row62.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(62,71,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row62.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(62,71,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+
+
+
+        //Now column and row////////////////////////////////////////
+        Row row74 =sheet.createRow(74);
+        //
+        cell=row74.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(74,74,1,7));
+        cell.setCellValue("View Antenna Before");
+        cell.setCellStyle(cellYellowBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row75 =sheet.createRow(75);
+        //
+        cell=row75.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(75,75,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row49.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(75,75,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row49.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row76 =sheet.createRow(76);
+        //
+        cell=row76.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(76,85,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row76.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(76,85,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row76.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(76,85,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row86 =sheet.createRow(86);
+        //
+        cell=row86.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(86,86,1,7));
+        cell.setCellValue("View Antenna After");
+        cell.setCellStyle(cellYellowBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row87 =sheet.createRow(87);
+        //
+        cell=row87.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(87,87,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row87.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(87,87,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row87.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row88 =sheet.createRow(88);
+        //
+        cell=row88.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(88,97,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row88.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(88,97,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row88.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(88,97,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+
+
+
+        //Now column and row////////////////////////////////////////
+        Row row100 =sheet.createRow(100);
+        //
+        cell=row100.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(100,100,1,7));
+        cell.setCellValue("Mechanical Tilt Before");
+        cell.setCellStyle(cellBlueBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row101 =sheet.createRow(101);
+        //
+        cell=row101.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(101,101,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row101.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(101,101,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row101.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row102 =sheet.createRow(102);
+        //
+        cell=row102.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(102,111,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row102.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(102,111,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row102.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(102,111,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row112 =sheet.createRow(112);
+        //
+        cell=row112.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(112,112,1,7));
+        cell.setCellValue("Mechanical Tilt After");
+        cell.setCellStyle(cellBlueBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row113 =sheet.createRow(113);
+        //
+        cell=row113.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(113,113,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row113.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(113,113,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row113.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row114 =sheet.createRow(114);
+        //
+        cell=row114.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(114,123,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row114.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(114,123,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row114.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(114,123,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+
+
+
+        //Now column and row////////////////////////////////////////
+        Row row126 =sheet.createRow(126);
+        //
+        cell=row126.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(126,126,1,7));
+        cell.setCellValue("Electrical Tilt Before");
+        cell.setCellStyle(cellOrangeBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row127 =sheet.createRow(127);
+        //
+        cell=row127.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(127,127,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row127.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(127,127,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row127.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row128 =sheet.createRow(128);
+        //
+        cell=row128.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(128,137,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row128.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(128,137,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row128.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(128,137,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row138 =sheet.createRow(138);
+        //
+        cell=row138.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(138,138,1,7));
+        cell.setCellValue("Electrical Tilt After");
+        cell.setCellStyle(cellOrangeBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row139 =sheet.createRow(139);
+        //
+        cell=row139.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(139,139,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row139.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(139,139,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row139.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row140 =sheet.createRow(140);
+        //
+        cell=row140.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(140,149,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row140.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(140,149,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row140.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(140,149,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+
+
+
+        //Now column and row////////////////////////////////////////
+        Row row152 =sheet.createRow(152);
+        //
+        cell=row152.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(152,152,1,7));
+        cell.setCellValue("Bracket Tilt Before");
+        cell.setCellStyle(cellYellowBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row153 =sheet.createRow(153);
+        //
+        cell=row153.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(153,153,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row153.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(153,153,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row153.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row154 =sheet.createRow(154);
+        //
+        cell=row154.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(154,163,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row154.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(154,163,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row154.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(154,163,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row164 =sheet.createRow(164);
+        //
+        cell=row164.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(164,164,1,7));
+        cell.setCellValue("Bracket Tilt After");
+        cell.setCellStyle(cellYellowBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row165 =sheet.createRow(165);
+        //
+        cell=row165.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(165,165,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row165.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(165,165,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row165.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row166 =sheet.createRow(166);
+        //
+        cell=row166.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(166,175,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row166.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(166,175,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row166.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(166,175,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+
+
+
+        //Now column and row////////////////////////////////////////
+        Row row178 =sheet.createRow(178);
+        //
+        cell=row178.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(178,178,1,7));
+        cell.setCellValue("Type Antenna");
+        cell.setCellStyle(cellYellowBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row179 =sheet.createRow(179);
+        //
+        cell=row179.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(179,179,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row179.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(179,179,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row179.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row180 =sheet.createRow(180);
+        //
+        cell=row180.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(180,189,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row180.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(180,189,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row180.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(180,189,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+
+
+        //Now column and row////////////////////////////////////////
+        Row row192 =sheet.createRow(192);
+        //
+        cell=row192.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(192,192,1,7));
+        cell.setCellValue("Antenna Height");
+        cell.setCellStyle(cellYellowBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row193 =sheet.createRow(193);
+        //
+        cell=row193.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(193,193,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row193.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(193,193,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row193.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row194 =sheet.createRow(194);
+        //
+        cell=row194.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(194,203,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row194.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(194,203,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row194.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(194,203,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+
+
+        //Now column and row////////////////////////////////////////
+        Row row205 =sheet.createRow(205);
+        //
+        cell=row205.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(205,205,1,7));
+        cell.setCellValue("RRU");
+        cell.setCellStyle(cellYellowBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row206 =sheet.createRow(206);
+        //
+        cell=row206.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(206,206,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row206.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(206,206,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row206.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row207 =sheet.createRow(207);
+        //
+        cell=row207.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(207,216,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row207.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(207,216,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row207.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(207,216,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+
+
+
+        //Now column and row////////////////////////////////////////
+        Row row218 =sheet.createRow(218);
+        //
+        cell=row218.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(218,218,1,7));
+        cell.setCellValue("RBS");
+        cell.setCellStyle(cellYellowBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row219 =sheet.createRow(219);
+        //
+        cell=row219.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(219,219,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row219.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(219,219,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row219.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row220 =sheet.createRow(220);
+        //
+        cell=row220.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(220,230,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row220.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(220,230,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row220.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(220,230,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+
+
+
+        //Now column and row////////////////////////////////////////
+        Row row232 =sheet.createRow(232);
+        //
+        cell=row232.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(232,232,1,7));
+        cell.setCellValue("Justifikasi");
+        cell.setCellStyle(cellBlueBold);
+
+        //Now column and row////////////////////////////////////////
+        Row row233 =sheet.createRow(233);
+        //
+        cell=row233.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(233,233,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row233.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(233,233,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row233.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row234 =sheet.createRow(234);
+        //
+        cell=row234.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(234,243,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row234.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(234,243,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row234.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(234,243,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row244 =sheet.createRow(244);
+        //
+        cell=row244.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(244,244,1,3));
+        cell.setCellValue("Sector_1=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row244.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(244,244,4,6));
+        cell.setCellValue("Sector_2=");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row244.createCell(7);
+        cell.setCellValue("Sector_3=");
+        cell.setCellStyle(alignCenter);
+
+        //Now column and row////////////////////////////////////////
+        Row row245 =sheet.createRow(245);
+        //
+        cell=row245.createCell(1);
+        sheet.addMergedRegion(new CellRangeAddress(245,254,1,3));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row245.createCell(4);
+        sheet.addMergedRegion(new CellRangeAddress(245,254,4,6));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+        //
+        cell=row245.createCell(7);
+        sheet.addMergedRegion(new CellRangeAddress(245,254,7,7));
+        cell.setCellValue("");
+        cell.setCellStyle(alignCenter);
+
+
+
+
+
+
+
+        File file = new File(getExternalFilesDir(null),"DriveTest2.xlsx");
+        FileOutputStream outputStream =null;
+
+        try {
+            outputStream=new FileOutputStream(file);
+            wb.write(outputStream);
+            Toast.makeText(getApplicationContext(),"OK",Toast.LENGTH_LONG).show();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+
+            Toast.makeText(getApplicationContext(),"NO OK",Toast.LENGTH_LONG).show();
+            try {
+                outputStream.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+}

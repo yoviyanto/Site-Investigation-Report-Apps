@@ -1,0 +1,2678 @@
+package com.example.app3;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.Manifest;
+import android.content.ComponentName;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.ClientAnchor;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Drawing;
+import org.apache.poi.ss.usermodel.Picture;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.util.IOUtils;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+public class ActivityGambar extends AppCompatActivity{
+
+//    FileInputStream updateStream1;
+
+    File file;
+
+    Workbook wb;
+
+    String pathImage1;
+
+    String stringOriBeforeSec1Data, stringOriBeforeSec2Data, stringOriBeforeSec3Data, stringOriAfterSec1Data, stringOriAfterSec2Data, stringOriAfterSec3Data,
+            stringMechTiltBeforeSec1Data, stringMechTiltBeforeSec2Data, stringMechTiltBeforeSec3Data, stringMechTiltAfterSec1Data, stringMechTiltAfterSec2Data, stringMechTiltAfterSec3Data,
+            stringElecTiltBeforeSec1Data, stringElecTiltBeforeSec2Data, stringElecTiltBeforeSec3Data, stringElecTiltAfterSec1Data, stringElecTiltAfterSec2Data, stringElecTiltAfterSec3Data,
+            stringModelSec1Data, stringModelSec2Data, stringModelSec3Data, stringAntennaHeightSec1Data, stringAntennaHeightSec2Data, stringAntennaHeightSec3Data;
+
+    String stringSiteIdData, stringSiteNameData, stringLongitudeData, stringLatitudeData, stringTowerHighData;
+
+    ImageView mImageview1, mImageview2, mImageview3, mImageview4, mImageview5, mImageview6, mImageview7, mImageview8, mImageview9, mImageview10,
+            mImageview11, mImageview12, mImageview13, mImageview14, mImageview15, mImageview16, mImageview17, mImageview18, mImageview19, mImageview20,
+            mImageview21, mImageview22, mImageview23, mImageview24, mImageview25, mImageview26, mImageview27, mImageview28, mImageview29, mImageview30,
+            mImageview31, mImageview32, mImageview33, mImageview34, mImageview35, mImageview36, mImageview37, mImageview38, mImageview39, mImageview40,
+            mImageview41, mImageview42, mImageview43, mImageview44, mImageview45, mImageview46, mImageview47, mImageview48, mImageview49, mImageview50,
+            mImageview51, mImageview52, mImageview53;
+    Button mChooseButton1, mChooseButton2, mChooseButton3, mChooseButton4, mChooseButton5, mChooseButton6, mChooseButton7, mChooseButton8, mChooseButton9, mChooseButton10,
+            mChooseButton11, mChooseButton12, mChooseButton13, mChooseButton14, mChooseButton15, mChooseButton16, mChooseButton17, mChooseButton18, mChooseButton19, mChooseButton20,
+            mChooseButton21, mChooseButton22, mChooseButton23, mChooseButton24, mChooseButton25, mChooseButton26, mChooseButton27, mChooseButton28, mChooseButton29, mChooseButton30,
+            mChooseButton31, mChooseButton32, mChooseButton33, mChooseButton34, mChooseButton35, mChooseButton36, mChooseButton37, mChooseButton38, mChooseButton39, mChooseButton40,
+            mChooseButton41, mChooseButton42, mChooseButton43, mChooseButton44, mChooseButton45, mChooseButton46, mChooseButton47, mChooseButton48, mChooseButton49, mChooseButton50,
+            mChooseButton51, mChooseButton52, mChooseButton53;
+    private Button mButtonExport;
+
+    private static final int IMAGE_PICK_CODE1 = 1001, IMAGE_PICK_CODE2 = 1002, IMAGE_PICK_CODE3 = 1003, IMAGE_PICK_CODE4 = 1004, IMAGE_PICK_CODE5 = 1005,
+            IMAGE_PICK_CODE6 = 1006, IMAGE_PICK_CODE7 = 1007, IMAGE_PICK_CODE8 = 1008, IMAGE_PICK_CODE9 = 1009, IMAGE_PICK_CODE10 = 1010,
+            IMAGE_PICK_CODE11 = 1011, IMAGE_PICK_CODE12 = 1012, IMAGE_PICK_CODE13 = 1013, IMAGE_PICK_CODE14 = 1014, IMAGE_PICK_CODE15 = 1015,
+            IMAGE_PICK_CODE16 = 1016, IMAGE_PICK_CODE17 = 1017, IMAGE_PICK_CODE18 = 1018, IMAGE_PICK_CODE19 = 1019, IMAGE_PICK_CODE20 = 1020,
+            IMAGE_PICK_CODE21 = 1021, IMAGE_PICK_CODE22 = 1022, IMAGE_PICK_CODE23 = 1023, IMAGE_PICK_CODE24 = 1024, IMAGE_PICK_CODE25 = 1025,
+            IMAGE_PICK_CODE26 = 1026, IMAGE_PICK_CODE27 = 1027, IMAGE_PICK_CODE28 = 1028, IMAGE_PICK_CODE29 = 1029, IMAGE_PICK_CODE30 = 1030,
+            IMAGE_PICK_CODE31 = 1031, IMAGE_PICK_CODE32 = 1032, IMAGE_PICK_CODE33 = 1033, IMAGE_PICK_CODE34 = 1034, IMAGE_PICK_CODE35 = 1035,
+            IMAGE_PICK_CODE36 = 1036, IMAGE_PICK_CODE37 = 1037, IMAGE_PICK_CODE38 = 1038, IMAGE_PICK_CODE39 = 1039, IMAGE_PICK_CODE40 = 1040,
+            IMAGE_PICK_CODE41 = 1041, IMAGE_PICK_CODE42 = 1042, IMAGE_PICK_CODE43 = 1043, IMAGE_PICK_CODE44 = 1044, IMAGE_PICK_CODE45 = 1045,
+            IMAGE_PICK_CODE46 = 1046, IMAGE_PICK_CODE47 = 1047, IMAGE_PICK_CODE48 = 1048, IMAGE_PICK_CODE49 = 1049, IMAGE_PICK_CODE50 = 1050,
+            IMAGE_PICK_CODE51 = 1051, IMAGE_PICK_CODE52 = 1052, IMAGE_PICK_CODE53 = 1053, IMAGE_PICK_CODE54 = 1054;
+
+    private static final int PERMISSION_CODE1 = 1101, PERMISSION_CODE2 = 1102, PERMISSION_CODE3 = 1103, PERMISSION_CODE4 = 1104, PERMISSION_CODE5 = 1105,
+            PERMISSION_CODE6 = 1106, PERMISSION_CODE7 = 1107, PERMISSION_CODE8 = 1108, PERMISSION_CODE9 = 1109, PERMISSION_CODE10 = 1110,
+            PERMISSION_CODE11 = 1111, PERMISSION_CODE12 = 1112, PERMISSION_CODE13 = 1113, PERMISSION_CODE14 = 1114, PERMISSION_CODE15 = 1115,
+            PERMISSION_CODE16 = 1116, PERMISSION_CODE17 = 1117, PERMISSION_CODE18 = 1118, PERMISSION_CODE19 = 1119, PERMISSION_CODE20 = 1120,
+            PERMISSION_CODE21 = 1121, PERMISSION_CODE22 = 1122, PERMISSION_CODE23 = 1123, PERMISSION_CODE24 = 1124, PERMISSION_CODE25 = 1125,
+            PERMISSION_CODE26 = 1126, PERMISSION_CODE27 = 1127, PERMISSION_CODE28 = 1128, PERMISSION_CODE29 = 1129, PERMISSION_CODE30 = 1130,
+            PERMISSION_CODE31 = 1131, PERMISSION_CODE32 = 1132, PERMISSION_CODE33 = 1133, PERMISSION_CODE34 = 1134, PERMISSION_CODE35 = 1135,
+            PERMISSION_CODE36 = 1136, PERMISSION_CODE37 = 1137, PERMISSION_CODE38 = 1138, PERMISSION_CODE39 = 1139, PERMISSION_CODE40 = 1140,
+            PERMISSION_CODE41 = 1141, PERMISSION_CODE42 = 1142, PERMISSION_CODE43 = 1143, PERMISSION_CODE44 = 1144, PERMISSION_CODE45 = 1145,
+            PERMISSION_CODE46 = 1146, PERMISSION_CODE47 = 1147, PERMISSION_CODE48 = 1148, PERMISSION_CODE49 = 1149, PERMISSION_CODE50 = 1150,
+            PERMISSION_CODE51 = 1151, PERMISSION_CODE52 = 1152, PERMISSION_CODE53 = 1153, PERMISSION_CODE54 = 1154;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_gambar);
+
+
+        Intent intent = getIntent();
+
+        pathImage1 = intent.getStringExtra("xtraPathImage1");
+
+
+        stringSiteIdData = intent.getStringExtra("xtraSiteIdData");
+        stringSiteNameData = intent.getStringExtra("xtraSiteNameData");
+        stringLongitudeData = intent.getStringExtra("xtraLongitudeData");
+        stringLatitudeData = intent.getStringExtra("xtraLatitudeData");
+        stringTowerHighData = intent.getStringExtra("xtraTowerHighData");
+
+        stringOriBeforeSec1Data = intent.getStringExtra("xtraOriBeforeSec1Data");
+        stringOriBeforeSec2Data = intent.getStringExtra("xtraOriBeforeSec2Data");
+        stringOriBeforeSec3Data = intent.getStringExtra("xtraOriBeforeSec3Data");
+        stringOriAfterSec1Data = intent.getStringExtra("xtraOriAfterSec1Data");
+        stringOriAfterSec2Data = intent.getStringExtra("xtraOriAfterSec2Data");
+        stringOriAfterSec3Data = intent.getStringExtra("xtraOriAfterSec3Data");
+        stringMechTiltBeforeSec1Data = intent.getStringExtra("xtraMechTiltBeforeSec1Data");
+        stringMechTiltBeforeSec2Data = intent.getStringExtra("xtraMechTiltBeforeSec2Data");
+        stringMechTiltBeforeSec3Data = intent.getStringExtra("xtraMechTiltBeforeSec3Data");
+        stringMechTiltAfterSec1Data = intent.getStringExtra("xtraMechTiltAfterSec1Data");
+        stringMechTiltAfterSec2Data = intent.getStringExtra("xtraMechTiltAfterSec2Data");
+        stringMechTiltAfterSec3Data = intent.getStringExtra("xtraMechTiltAfterSec3Data");
+        stringElecTiltBeforeSec1Data = intent.getStringExtra("xtraElecTiltBeforeSec1Data");
+        stringElecTiltBeforeSec2Data = intent.getStringExtra("xtraElecTiltBeforeSec2Data");
+        stringElecTiltBeforeSec3Data = intent.getStringExtra("xtraElecTiltBeforeSec3Data");
+        stringElecTiltAfterSec1Data = intent.getStringExtra("xtraeElecTiltAfterSec1Data");
+        stringElecTiltAfterSec2Data = intent.getStringExtra("xtraeElecTiltAfterSec2Data");
+        stringElecTiltAfterSec3Data = intent.getStringExtra("xtraeElecTiltAfterSec3Data");
+        stringModelSec1Data = intent.getStringExtra("xtraModelSec1Data");
+        stringModelSec2Data = intent.getStringExtra("xtraModelSec2Data");
+        stringModelSec3Data = intent.getStringExtra("xtraModelSec3Data");
+        stringAntennaHeightSec1Data = intent.getStringExtra("xtraAntennaHeightSec1Data");
+        stringAntennaHeightSec2Data = intent.getStringExtra("xtraAntennaHeightSec2Data");
+        stringAntennaHeightSec3Data = intent.getStringExtra("xtraAntennaHeightSec3Data");
+
+
+
+        //views
+        mImageview1 = findViewById(R.id.imageView1);
+        mImageview2 = findViewById(R.id.imageView2);
+        mImageview3 = findViewById(R.id.imageView3);
+        mImageview4 = findViewById(R.id.imageView4);
+        mImageview5 = findViewById(R.id.imageView5);
+        mImageview6 = findViewById(R.id.imageView6);
+        mImageview7 = findViewById(R.id.imageView7);
+        mImageview8 = findViewById(R.id.imageView8);
+        mImageview9 = findViewById(R.id.imageView9);
+        mImageview10 = findViewById(R.id.imageView10);
+        mImageview11 = findViewById(R.id.imageView11);
+        mImageview12 = findViewById(R.id.imageView12);
+        mImageview13 = findViewById(R.id.imageView13);
+        mImageview14 = findViewById(R.id.imageView14);
+        mImageview15 = findViewById(R.id.imageView15);
+        mImageview16 = findViewById(R.id.imageView16);
+        mImageview17 = findViewById(R.id.imageView17);
+        mImageview18 = findViewById(R.id.imageView18);
+        mImageview19 = findViewById(R.id.imageView19);
+        mImageview20 = findViewById(R.id.imageView20);
+        mImageview21 = findViewById(R.id.imageView21);
+        mImageview22 = findViewById(R.id.imageView22);
+        mImageview23 = findViewById(R.id.imageView23);
+        mImageview24 = findViewById(R.id.imageView24);
+        mImageview25 = findViewById(R.id.imageView25);
+        mImageview26 = findViewById(R.id.imageView26);
+        mImageview27 = findViewById(R.id.imageView27);
+        mImageview28 = findViewById(R.id.imageView28);
+        mImageview29 = findViewById(R.id.imageView29);
+        mImageview30 = findViewById(R.id.imageView30);
+        mImageview31 = findViewById(R.id.imageView31);
+        mImageview32 = findViewById(R.id.imageView32);
+        mImageview33 = findViewById(R.id.imageView33);
+        mImageview34 = findViewById(R.id.imageView34);
+        mImageview35 = findViewById(R.id.imageView35);
+        mImageview36 = findViewById(R.id.imageView36);
+        mImageview37 = findViewById(R.id.imageView37);
+        mImageview38 = findViewById(R.id.imageView38);
+        mImageview39 = findViewById(R.id.imageView39);
+        mImageview40 = findViewById(R.id.imageView40);
+        mImageview41 = findViewById(R.id.imageView41);
+        mImageview42 = findViewById(R.id.imageView42);
+        mImageview43 = findViewById(R.id.imageView43);
+        mImageview44 = findViewById(R.id.imageView44);
+        mImageview45 = findViewById(R.id.imageView45);
+        mImageview46 = findViewById(R.id.imageView46);
+        mImageview47 = findViewById(R.id.imageView47);
+        mImageview48 = findViewById(R.id.imageView48);
+        mImageview49 = findViewById(R.id.imageView49);
+        mImageview50 = findViewById(R.id.imageView50);
+        mImageview51 = findViewById(R.id.imageView51);
+        mImageview52 = findViewById(R.id.imageView52);
+        mImageview53 = findViewById(R.id.imageView53);
+
+        mChooseButton1 = findViewById(R.id.chooseImage1);
+        mChooseButton2 = findViewById(R.id.chooseImage2);
+        mChooseButton3 = findViewById(R.id.chooseImage3);
+        mChooseButton4 = findViewById(R.id.chooseImage4);
+        mChooseButton5 = findViewById(R.id.chooseImage5);
+        mChooseButton6 = findViewById(R.id.chooseImage6);
+        mChooseButton7 = findViewById(R.id.chooseImage7);
+        mChooseButton8 = findViewById(R.id.chooseImage8);
+        mChooseButton9 = findViewById(R.id.chooseImage9);
+        mChooseButton10 = findViewById(R.id.chooseImage10);
+        mChooseButton11 = findViewById(R.id.chooseImage11);
+        mChooseButton12 = findViewById(R.id.chooseImage12);
+        mChooseButton13 = findViewById(R.id.chooseImage13);
+        mChooseButton14 = findViewById(R.id.chooseImage14);
+        mChooseButton15 = findViewById(R.id.chooseImage15);
+        mChooseButton16 = findViewById(R.id.chooseImage16);
+        mChooseButton17 = findViewById(R.id.chooseImage17);
+        mChooseButton18 = findViewById(R.id.chooseImage18);
+        mChooseButton19 = findViewById(R.id.chooseImage19);
+        mChooseButton20 = findViewById(R.id.chooseImage20);
+        mChooseButton21 = findViewById(R.id.chooseImage21);
+        mChooseButton22 = findViewById(R.id.chooseImage22);
+        mChooseButton23 = findViewById(R.id.chooseImage23);
+        mChooseButton24 = findViewById(R.id.chooseImage24);
+        mChooseButton25 = findViewById(R.id.chooseImage25);
+        mChooseButton26 = findViewById(R.id.chooseImage26);
+        mChooseButton27 = findViewById(R.id.chooseImage27);
+        mChooseButton28 = findViewById(R.id.chooseImage28);
+        mChooseButton29 = findViewById(R.id.chooseImage29);
+        mChooseButton30 = findViewById(R.id.chooseImage30);
+        mChooseButton31 = findViewById(R.id.chooseImage31);
+        mChooseButton32 = findViewById(R.id.chooseImage32);
+        mChooseButton33 = findViewById(R.id.chooseImage33);
+        mChooseButton34 = findViewById(R.id.chooseImage34);
+        mChooseButton35 = findViewById(R.id.chooseImage35);
+        mChooseButton36 = findViewById(R.id.chooseImage36);
+        mChooseButton37 = findViewById(R.id.chooseImage37);
+        mChooseButton38 = findViewById(R.id.chooseImage38);
+        mChooseButton39 = findViewById(R.id.chooseImage39);
+        mChooseButton40 = findViewById(R.id.chooseImage40);
+        mChooseButton41 = findViewById(R.id.chooseImage41);
+        mChooseButton42 = findViewById(R.id.chooseImage42);
+        mChooseButton43 = findViewById(R.id.chooseImage43);
+        mChooseButton44 = findViewById(R.id.chooseImage44);
+        mChooseButton45 = findViewById(R.id.chooseImage45);
+        mChooseButton46 = findViewById(R.id.chooseImage46);
+        mChooseButton47 = findViewById(R.id.chooseImage47);
+        mChooseButton48 = findViewById(R.id.chooseImage48);
+        mChooseButton49 = findViewById(R.id.chooseImage49);
+        mChooseButton50 = findViewById(R.id.chooseImage50);
+        mChooseButton51 = findViewById(R.id.chooseImage51);
+        mChooseButton52 = findViewById(R.id.chooseImage52);
+        mChooseButton53 = findViewById(R.id.chooseImage53);
+        mButtonExport = findViewById(R.id.buttonExport);
+/*
+        mButtonExport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivityExport();
+            }
+        });
+*/
+        mButtonExport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivityExport();
+            }
+        });
+
+        //handle button click
+        mChooseButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE1);
+                    } else {
+                        pickImageFromGallery();
+                    }
+                } else{
+                    pickImageFromGallery();
+                }
+            }
+        });
+
+        mChooseButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE2);
+                    } else {
+                        pickImageFromGallery2();
+                    }
+                } else{
+                    pickImageFromGallery2();
+                }
+            }
+        });
+
+        mChooseButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE3);
+                    } else {
+                        pickImageFromGallery3();
+                    }
+                } else{
+                    pickImageFromGallery3();
+                }
+            }
+        });
+
+        mChooseButton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE4);
+                    } else {
+                        pickImageFromGallery4();
+                    }
+                } else{
+                    pickImageFromGallery4();
+                }
+            }
+        });
+
+        mChooseButton5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE5);
+                    } else {
+                        pickImageFromGallery5();
+                    }
+                } else{
+                    pickImageFromGallery5();
+                }
+            }
+        });
+
+        mChooseButton6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE6);
+                    } else {
+                        pickImageFromGallery6();
+                    }
+                } else{
+                    pickImageFromGallery6();
+                }
+            }
+        });
+
+        mChooseButton7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE7);
+                    } else {
+                        pickImageFromGallery7();
+                    }
+                } else{
+                    pickImageFromGallery7();
+                }
+            }
+        });
+
+        mChooseButton8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE8);
+                    } else {
+                        pickImageFromGallery8();
+                    }
+                } else{
+                    pickImageFromGallery8();
+                }
+            }
+        });
+
+        mChooseButton9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE9);
+                    } else {
+                        pickImageFromGallery9();
+                    }
+                } else{
+                    pickImageFromGallery9();
+                }
+            }
+        });
+
+        mChooseButton10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE10);
+                    } else {
+                        pickImageFromGallery10();
+                    }
+                } else{
+                    pickImageFromGallery10();
+                }
+            }
+        });
+
+        mChooseButton11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE11);
+                    } else {
+                        pickImageFromGallery11();
+                    }
+                } else{
+                    pickImageFromGallery11();
+                }
+            }
+        });
+
+        mChooseButton12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE12);
+                    } else {
+                        pickImageFromGallery12();
+                    }
+                } else{
+                    pickImageFromGallery12();
+                }
+            }
+        });
+
+        mChooseButton13.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE13);
+                    } else {
+                        pickImageFromGallery13();
+                    }
+                } else{
+                    pickImageFromGallery13();
+                }
+            }
+        });
+
+        mChooseButton14.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE14);
+                    } else {
+                        pickImageFromGallery14();
+                    }
+                } else{
+                    pickImageFromGallery14();
+                }
+            }
+        });
+
+        mChooseButton15.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE15);
+                    } else {
+                        pickImageFromGallery15();
+                    }
+                } else{
+                    pickImageFromGallery15();
+                }
+            }
+        });
+
+        mChooseButton16.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE16);
+                    } else {
+                        pickImageFromGallery16();
+                    }
+                } else{
+                    pickImageFromGallery16();
+                }
+            }
+        });
+
+        mChooseButton17.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE17);
+                    } else {
+                        pickImageFromGallery17();
+                    }
+                } else{
+                    pickImageFromGallery17();
+                }
+            }
+        });
+
+        mChooseButton18.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE18);
+                    } else {
+                        pickImageFromGallery18();
+                    }
+                } else{
+                    pickImageFromGallery18();
+                }
+            }
+        });
+
+        mChooseButton19.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE19);
+                    } else {
+                        pickImageFromGallery19();
+                    }
+                } else{
+                    pickImageFromGallery19();
+                }
+            }
+        });
+
+        mChooseButton20.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE20);
+                    } else {
+                        pickImageFromGallery20();
+                    }
+                } else{
+                    pickImageFromGallery20();
+                }
+            }
+        });
+
+        mChooseButton21.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE21);
+                    } else {
+                        pickImageFromGallery21();
+                    }
+                } else{
+                    pickImageFromGallery21();
+                }
+            }
+        });
+
+        mChooseButton22.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE22);
+                    } else {
+                        pickImageFromGallery22();
+                    }
+                } else{
+                    pickImageFromGallery22();
+                }
+            }
+        });
+
+        mChooseButton23.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE23);
+                    } else {
+                        pickImageFromGallery23();
+                    }
+                } else{
+                    pickImageFromGallery23();
+                }
+            }
+        });
+
+        mChooseButton24.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE24);
+                    } else {
+                        pickImageFromGallery24();
+                    }
+                } else{
+                    pickImageFromGallery24();
+                }
+            }
+        });
+
+        mChooseButton25.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE25);
+                    } else {
+                        pickImageFromGallery25();
+                    }
+                } else{
+                    pickImageFromGallery25();
+                }
+            }
+        });
+
+        mChooseButton26.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE26);
+                    } else {
+                        pickImageFromGallery26();
+                    }
+                } else{
+                    pickImageFromGallery26();
+                }
+            }
+        });
+
+        mChooseButton27.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE27);
+                    } else {
+                        pickImageFromGallery27();
+                    }
+                } else{
+                    pickImageFromGallery27();
+                }
+            }
+        });
+
+        mChooseButton28.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE28);
+                    } else {
+                        pickImageFromGallery28();
+                    }
+                } else{
+                    pickImageFromGallery28();
+                }
+            }
+        });
+
+        mChooseButton29.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE29);
+                    } else {
+                        pickImageFromGallery29();
+                    }
+                } else{
+                    pickImageFromGallery29();
+                }
+            }
+        });
+
+        mChooseButton30.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE30);
+                    } else {
+                        pickImageFromGallery30();
+                    }
+                } else{
+                    pickImageFromGallery30();
+                }
+            }
+        });
+
+        mChooseButton31.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE31);
+                    } else {
+                        pickImageFromGallery31();
+                    }
+                } else{
+                    pickImageFromGallery31();
+                }
+            }
+        });
+
+        mChooseButton32.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE32);
+                    } else {
+                        pickImageFromGallery32();
+                    }
+                } else{
+                    pickImageFromGallery32();
+                }
+            }
+        });
+
+        mChooseButton33.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE33);
+                    } else {
+                        pickImageFromGallery33();
+                    }
+                } else{
+                    pickImageFromGallery33();
+                }
+            }
+        });
+
+        mChooseButton34.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE34);
+                    } else {
+                        pickImageFromGallery34();
+                    }
+                } else{
+                    pickImageFromGallery34();
+                }
+            }
+        });
+
+        mChooseButton35.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE35);
+                    } else {
+                        pickImageFromGallery35();
+                    }
+                } else{
+                    pickImageFromGallery35();
+                }
+            }
+        });
+
+        mChooseButton36.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE36);
+                    } else {
+                        pickImageFromGallery36();
+                    }
+                } else{
+                    pickImageFromGallery36();
+                }
+            }
+        });
+
+        mChooseButton37.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE37);
+                    } else {
+                        pickImageFromGallery37();
+                    }
+                } else{
+                    pickImageFromGallery37();
+                }
+            }
+        });
+
+        mChooseButton38.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE38);
+                    } else {
+                        pickImageFromGallery38();
+                    }
+                } else{
+                    pickImageFromGallery38();
+                }
+            }
+        });
+
+        mChooseButton39.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE39);
+                    } else {
+                        pickImageFromGallery39();
+                    }
+                } else{
+                    pickImageFromGallery39();
+                }
+            }
+        });
+
+        mChooseButton40.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE40);
+                    } else {
+                        pickImageFromGallery40();
+                    }
+                } else{
+                    pickImageFromGallery40();
+                }
+            }
+        });
+
+        mChooseButton41.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE41);
+                    } else {
+                        pickImageFromGallery41();
+                    }
+                } else{
+                    pickImageFromGallery41();
+                }
+            }
+        });
+
+        mChooseButton42.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE42);
+                    } else {
+                        pickImageFromGallery42();
+                    }
+                } else{
+                    pickImageFromGallery42();
+                }
+            }
+        });
+
+        mChooseButton43.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE43);
+                    } else {
+                        pickImageFromGallery43();
+                    }
+                } else{
+                    pickImageFromGallery43();
+                }
+            }
+        });
+
+        mChooseButton44.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE44);
+                    } else {
+                        pickImageFromGallery44();
+                    }
+                } else{
+                    pickImageFromGallery44();
+                }
+            }
+        });
+
+        mChooseButton45.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE45);
+                    } else {
+                        pickImageFromGallery45();
+                    }
+                } else{
+                    pickImageFromGallery45();
+                }
+            }
+        });
+
+        mChooseButton46.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE46);
+                    } else {
+                        pickImageFromGallery46();
+                    }
+                } else{
+                    pickImageFromGallery46();
+                }
+            }
+        });
+
+        mChooseButton47.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE47);
+                    } else {
+                        pickImageFromGallery47();
+                    }
+                } else{
+                    pickImageFromGallery47();
+                }
+            }
+        });
+
+        mChooseButton48.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE48);
+                    } else {
+                        pickImageFromGallery48();
+                    }
+                } else{
+                    pickImageFromGallery48();
+                }
+            }
+        });
+
+        mChooseButton49.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE49);
+                    } else {
+                        pickImageFromGallery49();
+                    }
+                } else{
+                    pickImageFromGallery49();
+                }
+            }
+        });
+
+        mChooseButton50.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE50);
+                    } else {
+                        pickImageFromGallery50();
+                    }
+                } else{
+                    pickImageFromGallery50();
+                }
+            }
+        });
+
+        mChooseButton51.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE51);
+                    } else {
+                        pickImageFromGallery51();
+                    }
+                } else{
+                    pickImageFromGallery51();
+                }
+            }
+        });
+
+        mChooseButton52.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE52);
+                    } else {
+                        pickImageFromGallery52();
+                    }
+                } else{
+                    pickImageFromGallery52();
+                }
+            }
+        });
+
+        mChooseButton53.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_DENIED) {
+                        //permision granted
+                        String permissions = (Manifest.permission.READ_EXTERNAL_STORAGE);
+                        //show pop up
+                        requestPermissions(new String[]{permissions}, PERMISSION_CODE53);
+                    } else {
+                        pickImageFromGallery53();
+                    }
+                } else{
+                    pickImageFromGallery53();
+                }
+            }
+        });
+
+
+    }
+
+    private void pickImageFromGallery(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE1);
+    }
+
+    private void pickImageFromGallery2(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE2);
+    }
+
+    private void pickImageFromGallery3(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE3);
+    }
+
+    private void pickImageFromGallery4(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE4);
+    }
+
+    private void pickImageFromGallery5(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE5);
+    }
+
+    private void pickImageFromGallery6(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE6);
+    }
+
+    private void pickImageFromGallery7(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE7);
+    }
+
+    private void pickImageFromGallery8(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE8);
+    }
+
+    private void pickImageFromGallery9(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE9);
+    }
+
+    private void pickImageFromGallery10(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE10);
+    }
+
+    private void pickImageFromGallery11(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE11);
+    }
+
+    private void pickImageFromGallery12(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE12);
+    }
+
+    private void pickImageFromGallery13(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE13);
+    }
+
+    private void pickImageFromGallery14(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE14);
+    }
+
+    private void pickImageFromGallery15(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE15);
+    }
+
+    private void pickImageFromGallery16(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE16);
+    }
+
+    private void pickImageFromGallery17(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE17);
+    }
+
+    private void pickImageFromGallery18(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE18);
+    }
+
+    private void pickImageFromGallery19(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE19);
+    }
+
+    private void pickImageFromGallery20(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE20);
+    }
+
+    private void pickImageFromGallery21(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE21);
+    }
+
+    private void pickImageFromGallery22(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE22);
+    }
+
+    private void pickImageFromGallery23(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE23);
+    }
+
+    private void pickImageFromGallery24(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE24);
+    }
+
+    private void pickImageFromGallery25(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE25);
+    }
+
+    private void pickImageFromGallery26(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE26);
+    }
+
+    private void pickImageFromGallery27(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE27);
+    }
+
+    private void pickImageFromGallery28(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE28);
+    }
+
+    private void pickImageFromGallery29(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE29);
+    }
+
+    private void pickImageFromGallery30(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE30);
+    }
+
+    private void pickImageFromGallery31(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE31);
+    }
+
+    private void pickImageFromGallery32(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE32);
+    }
+
+    private void pickImageFromGallery33(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE33);
+    }
+
+    private void pickImageFromGallery34(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE34);
+    }
+
+    private void pickImageFromGallery35(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE35);
+    }
+
+    private void pickImageFromGallery36(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE36);
+    }
+
+    private void pickImageFromGallery37(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE37);
+    }
+
+    private void pickImageFromGallery38(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE38);
+    }
+
+    private void pickImageFromGallery39(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE39);
+    }
+
+    private void pickImageFromGallery40(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE40);
+    }
+
+    private void pickImageFromGallery41(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE41);
+    }
+
+    private void pickImageFromGallery42(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE42);
+    }
+
+    private void pickImageFromGallery43(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE43);
+    }
+
+    private void pickImageFromGallery44(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE44);
+    }
+
+    private void pickImageFromGallery45(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE45);
+    }
+
+    private void pickImageFromGallery46(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE46);
+    }
+
+    private void pickImageFromGallery47(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE47);
+    }
+
+    private void pickImageFromGallery48(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE48);
+    }
+
+    private void pickImageFromGallery49(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE49);
+    }
+
+    private void pickImageFromGallery50(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE50);
+    }
+
+    private void pickImageFromGallery51(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE51);
+    }
+
+    private void pickImageFromGallery52(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE52);
+    }
+
+    private void pickImageFromGallery53(){
+        //pick image
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE53);
+    }
+
+
+
+
+
+    //result runtime permission
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case PERMISSION_CODE1:{
+                if (grantResults.length >0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED){
+                    //granted
+                    pickImageFromGallery(); break;
+                }
+                else{
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE2: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery2();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE3: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery3();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE4: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery4();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE5: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery5();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE6: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery6();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE7: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery7();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE8: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery8();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE9: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery9();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE10: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery10();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE11:{
+                if (grantResults.length >0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED){
+                    //granted
+                    pickImageFromGallery11(); break;
+                }
+                else{
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE12: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery12();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE13: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery13();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE14: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery14();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE15: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery15();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE16: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery16();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE17: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery17();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE18: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery18();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE19: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery19();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE20: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery20();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE21:{
+                if (grantResults.length >0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED){
+                    //granted
+                    pickImageFromGallery21(); break;
+                }
+                else{
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE22: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery22();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE23: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery23();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE24: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery24();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE25: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery25();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE26: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery26();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE27: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery27();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE28: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery28();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE29: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery29();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE30: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery30();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE31:{
+                if (grantResults.length >0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED){
+                    //granted
+                    pickImageFromGallery31(); break;
+                }
+                else{
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE32: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery32();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE33: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery33();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE34: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery34();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE35: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery35();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE36: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery36();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE37: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery37();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE38: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery38();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE39: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery39();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE40: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery40();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE41:{
+                if (grantResults.length >0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED){
+                    //granted
+                    pickImageFromGallery41(); break;
+                }
+                else{
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE42: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery42();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE43: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery43();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE44: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery44();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE45: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery45();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE46: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery46();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE47: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery47();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE48: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery48();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE49: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery49();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE50: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery50();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE51:{
+                if (grantResults.length >0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED){
+                    //granted
+                    pickImageFromGallery51(); break;
+                }
+                else{
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE52: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery52();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            case PERMISSION_CODE53: {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    //granted
+                    pickImageFromGallery53();
+                    break;
+                } else {
+                    //denied
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+
+
+
+    public void UpdateExcel(Uri uri, int row, int col, int col1, int row1, int col2, int row2) {
+        File file = new File(getExternalFilesDir(null), "DriveTest2.xlsx");
+        String fileString = file.getPath();
+        Workbook wb = null;
+        try {
+            wb = WorkbookFactory.create(new File(fileString));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InvalidFormatException e) {
+            e.printStackTrace();
+        }
+        Cell cell = null;
+
+        //Now we are creating sheet//////////////////////////////////
+        Sheet sheet = wb.getSheetAt(0);
+        try {
+            InputStream imageStream1 = getContentResolver().openInputStream(uri);
+            byte[] bytes1 = IOUtils.toByteArray(imageStream1);
+            int picId = wb.addPicture(bytes1, Workbook.PICTURE_TYPE_JPEG);
+            imageStream1.close();
+            cell = sheet.getRow(row).getCell(col);
+            //sheet.getMergedRegion(new CellRangeAddress(16,33,1,4));
+            CreationHelper helper = wb.getCreationHelper();
+            Drawing drawing = sheet.createDrawingPatriarch();
+            ClientAnchor anchor = helper.createClientAnchor();
+            anchor.setCol1(col1);
+            anchor.setRow1(row1);
+            anchor.setCol2(col2);
+            anchor.setRow2(row2);
+            Picture pict1 = drawing.createPicture(anchor, picId);
+            pict1.resize();
+            //Row row16 =sheet.createRow(16);
+            //cell=row16.createCell(1);
+            //sheet.addMergedRegion(new CellRangeAddress(16,33,1,4));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "FileNotFoundException", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "IOException", Toast.LENGTH_LONG).show();
+        }
+        file = new File(getExternalFilesDir(null), "DriveTest2.xlsx");
+        FileOutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream(file);
+            wb.write(outputStream);
+            Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_LONG).show();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "NO OK", Toast.LENGTH_LONG).show();
+            try {
+                outputStream.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+
+
+    //HANDLE RESULT PICKED IMAGE
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE1){
+            //set image to image view
+            Uri uri = data.getData();
+            mImageview1.setImageURI(uri);
+            UpdateExcel(uri, 16, 1, 1, 16, 5, 34);
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE2){
+            //set image to image view
+            Uri uri = data.getData();
+            mImageview2.setImageURI(uri);
+            UpdateExcel(uri, 16, 6, 6, 16, 8, 34);
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE3) {
+            //set image to image view
+            Uri uri = data.getData();
+            mImageview3.setImageURI(uri);
+            UpdateExcel(uri, 34, 1, 34, 1, 43, 3);
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE4) {
+            //set image to image view
+            Uri uri = data.getData();
+            mImageview2.setImageURI(uri);
+            UpdateExcel(uri, 16, 6, 6, 16, 8, 34);
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE5) {
+            //set image to image view
+            mImageview5.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE6) {
+            //set image to image view
+            mImageview6.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE7) {
+            //set image to image view
+            mImageview7.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE8) {
+            //set image to image view
+            mImageview8.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE9) {
+            //set image to image view
+            mImageview9.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE10) {
+            //set image to image view
+            mImageview10.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE11){
+            //set image to image view
+            mImageview11.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE12){
+            //set image to image view
+            mImageview12.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE13) {
+            //set image to image view
+            mImageview13.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE14) {
+            //set image to image view
+            mImageview14.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE15) {
+            //set image to image view
+            mImageview15.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE16) {
+            //set image to image view
+            mImageview16.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE17) {
+            //set image to image view
+            mImageview17.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE18) {
+            //set image to image view
+            mImageview18.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE19) {
+            //set image to image view
+            mImageview19.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE20) {
+            //set image to image view
+            mImageview20.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE21){
+            //set image to image view
+            mImageview21.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE22){
+            //set image to image view
+            mImageview22.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE23) {
+            //set image to image view
+            mImageview23.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE24) {
+            //set image to image view
+            mImageview24.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE25) {
+            //set image to image view
+            mImageview25.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE26) {
+            //set image to image view
+            mImageview26.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE27) {
+            //set image to image view
+            mImageview27.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE28) {
+            //set image to image view
+            mImageview28.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE29) {
+            //set image to image view
+            mImageview29.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE30) {
+            //set image to image view
+            mImageview30.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE31){
+            //set image to image view
+            mImageview31.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE32){
+            //set image to image view
+            mImageview32.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE33) {
+            //set image to image view
+            mImageview33.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE34) {
+            //set image to image view
+            mImageview34.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE35) {
+            //set image to image view
+            mImageview35.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE36) {
+            //set image to image view
+            mImageview36.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE37) {
+            //set image to image view
+            mImageview37.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE38) {
+            //set image to image view
+            mImageview38.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE39) {
+            //set image to image view
+            mImageview39.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE40) {
+            //set image to image view
+            mImageview40.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE41){
+            //set image to image view
+            mImageview41.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE42){
+            //set image to image view
+            mImageview42.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE43) {
+            //set image to image view
+            mImageview43.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE44) {
+            //set image to image view
+            mImageview44.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE45) {
+            //set image to image view
+            mImageview45.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE46) {
+            //set image to image view
+            mImageview46.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE47) {
+            //set image to image view
+            mImageview47.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE48) {
+            //set image to image view
+            mImageview48.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE49) {
+            //set image to image view
+            mImageview49.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE50) {
+            //set image to image view
+            mImageview50.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE51){
+            //set image to image view
+            mImageview51.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE52){
+            //set image to image view
+            mImageview52.setImageURI(data.getData());
+        }
+
+        else if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE53) {
+            //set image to image view
+            mImageview53.setImageURI(data.getData());
+        }
+
+    }
+
+    //open next activity
+    public void openActivityExport() {
+        Intent intent = new Intent(this, ActivityExport.class);
+
+        intent.putExtra("xtraOriBeforeSec1Data", stringOriBeforeSec1Data);
+        intent.putExtra("xtraOriBeforeSec2Data", stringOriBeforeSec2Data);
+        intent.putExtra("xtraOriBeforeSec3Data", stringOriBeforeSec3Data);
+        intent.putExtra("xtraOriAfterSec1Data", stringOriAfterSec1Data);
+        intent.putExtra("xtraOriAfterSec2Data", stringOriAfterSec2Data);
+        intent.putExtra("xtraOriAfterSec3Data", stringOriAfterSec3Data);
+        intent.putExtra("xtraMechTiltBeforeSec1Data", stringMechTiltBeforeSec1Data);
+        intent.putExtra("xtraMechTiltBeforeSec2Data", stringMechTiltBeforeSec2Data);
+        intent.putExtra("xtraMechTiltBeforeSec3Data", stringMechTiltBeforeSec3Data);
+        intent.putExtra("xtraMechTiltAfterSec1Data", stringMechTiltAfterSec1Data);
+        intent.putExtra("xtraMechTiltAfterSec2Data", stringMechTiltAfterSec2Data);
+        intent.putExtra("xtraMechTiltAfterSec3Data", stringMechTiltAfterSec3Data);
+        intent.putExtra("xtraElecTiltBeforeSec1Data", stringElecTiltBeforeSec1Data);
+        intent.putExtra("xtraElecTiltBeforeSec2Data", stringElecTiltBeforeSec2Data);
+        intent.putExtra("xtraElecTiltBeforeSec3Data", stringElecTiltBeforeSec3Data);
+        intent.putExtra("xtraeElecTiltAfterSec1Data", stringElecTiltAfterSec1Data);
+        intent.putExtra("xtraeElecTiltAfterSec2Data", stringElecTiltAfterSec2Data);
+        intent.putExtra("xtraeElecTiltAfterSec3Data", stringElecTiltAfterSec3Data);
+        intent.putExtra("xtraModelSec1Data", stringModelSec1Data);
+        intent.putExtra("xtraModelSec2Data", stringModelSec2Data);
+        intent.putExtra("xtraModelSec3Data", stringModelSec3Data);
+        intent.putExtra("xtraAntennaHeightSec1Data", stringAntennaHeightSec1Data);
+        intent.putExtra("xtraAntennaHeightSec2Data", stringAntennaHeightSec2Data);
+        intent.putExtra("xtraAntennaHeightSec3Data", stringAntennaHeightSec3Data);
+
+        intent.putExtra("xtraSiteIdData", stringSiteIdData);
+        intent.putExtra("xtraSiteNameData", stringSiteNameData);
+        intent.putExtra("xtraLongitudeData", stringLongitudeData);
+        intent.putExtra("xtraLatitudeData", stringLatitudeData);
+        intent.putExtra("xtraTowerHighData", stringTowerHighData);
+
+        startActivity(intent);
+    }
+
+}

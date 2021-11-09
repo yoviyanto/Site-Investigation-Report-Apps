@@ -1,0 +1,159 @@
+package com.example.app3;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class ActivityAntenna extends AppCompatActivity {
+    private Button button2;
+    EditText mOriBeforeSec1Data, mOriBeforeSec2Data, mOriBeforeSec3Data, mOriAfterSec1Data, mOriAfterSec2Data, mOriAfterSec3Data,
+            mMechTiltBeforeSec1Data, mMechTiltBeforeSec2Data, mMechTiltBeforeSec3Data, mMechTiltAfterSec1Data, mMechTiltAfterSec2Data, mMechTiltAfterSec3Data,
+            mElecTiltBeforeSec1Data, mElecTiltBeforeSec2Data, mElecTiltBeforeSec3Data, mElecTiltAfterSec1Data, mElecTiltAfterSec2Data, mElecTiltAfterSec3Data,
+            mModelSec1Data, mModelSec2Data, mModelSec3Data, mAntennaHeightSec1Data, mAntennaHeightSec2Data, mAntennaHeightSec3Data;
+
+    String stringOriBeforeSec1Data, stringOriBeforeSec2Data, stringOriBeforeSec3Data, stringOriAfterSec1Data, stringOriAfterSec2Data, stringOriAfterSec3Data,
+            stringMechTiltBeforeSec1Data, stringMechTiltBeforeSec2Data, stringMechTiltBeforeSec3Data, stringMechTiltAfterSec1Data, stringMechTiltAfterSec2Data, stringMechTiltAfterSec3Data,
+            stringElecTiltBeforeSec1Data, stringElecTiltBeforeSec2Data, stringElecTiltBeforeSec3Data, stringElecTiltAfterSec1Data, stringElecTiltAfterSec2Data, stringElecTiltAfterSec3Data,
+            stringModelSec1Data, stringModelSec2Data, stringModelSec3Data, stringAntennaHeightSec1Data, stringAntennaHeightSec2Data, stringAntennaHeightSec3Data;
+
+    String stringSiteIdData, stringSiteNameData, stringLongitudeData, stringLatitudeData, stringTowerHighData;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_antenna);
+
+
+        Intent intent = getIntent();
+        stringSiteIdData = intent.getStringExtra("xtraSiteIdData");
+        stringSiteNameData = intent.getStringExtra("xtraSiteNameData");
+        stringLongitudeData = intent.getStringExtra("xtraLongitudeData");
+        stringLatitudeData = intent.getStringExtra("xtraLatitudeData");
+        stringTowerHighData = intent.getStringExtra("xtraTowerHighData");
+
+
+
+        button2 = (Button) findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivityGambar();
+            }
+        });
+    }
+
+    public void openActivityGambar() {
+        Intent intent = new Intent(this, ActivityGambar.class);
+
+        mOriBeforeSec1Data = (EditText) findViewById(R.id.oriBeforeSec1Data);
+        stringOriBeforeSec1Data =  mOriBeforeSec1Data.getText().toString();
+
+        mOriBeforeSec2Data = (EditText) findViewById(R.id.oriBeforeSec2Data);
+        stringOriBeforeSec2Data =  mOriBeforeSec2Data.getText().toString();
+
+        mOriBeforeSec3Data = (EditText) findViewById(R.id.oriBeforeSec3Data);
+        stringOriBeforeSec3Data =  mOriBeforeSec3Data.getText().toString();
+
+        mOriAfterSec1Data = (EditText) findViewById(R.id.oriAfterSec1Data);
+        stringOriAfterSec1Data =  mOriAfterSec1Data.getText().toString();
+
+        mOriAfterSec2Data = (EditText) findViewById(R.id.oriAfterSec2Data);
+        stringOriAfterSec2Data =  mOriAfterSec2Data.getText().toString();
+
+        mOriAfterSec3Data = (EditText) findViewById(R.id.oriAfterSec3Data);
+        stringOriAfterSec3Data =  mOriAfterSec3Data.getText().toString();
+
+        mMechTiltBeforeSec1Data = (EditText) findViewById(R.id.mechTiltBeforeSec1Data);
+        stringMechTiltBeforeSec1Data =  mMechTiltBeforeSec1Data.getText().toString();
+
+        mMechTiltBeforeSec2Data = (EditText) findViewById(R.id.mechTiltBeforeSec2Data);
+        stringMechTiltBeforeSec2Data =  mMechTiltBeforeSec2Data.getText().toString();
+
+        mMechTiltBeforeSec3Data = (EditText) findViewById(R.id.mechTiltBeforeSec3Data);
+        stringMechTiltBeforeSec3Data =  mMechTiltBeforeSec3Data.getText().toString();
+
+        mMechTiltAfterSec1Data = (EditText) findViewById(R.id.mechTiltAfterSec1Data);
+        stringMechTiltAfterSec1Data =  mMechTiltAfterSec1Data.getText().toString();
+
+        mMechTiltAfterSec2Data = (EditText) findViewById(R.id.mechTiltAfterSec2Data);
+        stringMechTiltAfterSec2Data  =  mMechTiltAfterSec2Data.getText().toString();
+
+        mMechTiltAfterSec3Data = (EditText) findViewById(R.id.mechTiltAfterSec3Data);
+        stringMechTiltAfterSec3Data  =  mMechTiltAfterSec3Data.getText().toString();
+
+        mElecTiltBeforeSec1Data = (EditText) findViewById(R.id.elecTiltBeforeSec1Data);
+        stringElecTiltBeforeSec1Data =  mElecTiltBeforeSec1Data.getText().toString();
+
+        mElecTiltBeforeSec2Data = (EditText) findViewById(R.id.elecTiltBeforeSec2Data);
+        stringElecTiltBeforeSec2Data =  mElecTiltBeforeSec2Data.getText().toString();
+
+        mElecTiltBeforeSec3Data = (EditText) findViewById(R.id.elecTiltBeforeSec3Data);
+        stringElecTiltBeforeSec3Data =  mElecTiltBeforeSec3Data.getText().toString();
+
+        mElecTiltAfterSec1Data = (EditText) findViewById(R.id.elecTiltAfterSec1Data);
+        stringElecTiltAfterSec1Data =  mElecTiltAfterSec1Data.getText().toString();
+
+        mElecTiltAfterSec2Data = (EditText) findViewById(R.id.elecTiltAfterSec2Data);
+        stringElecTiltAfterSec2Data =  mElecTiltAfterSec2Data.getText().toString();
+
+        mElecTiltAfterSec3Data = (EditText) findViewById(R.id.elecTiltAfterSec3Data);
+        stringElecTiltAfterSec3Data =  mElecTiltAfterSec3Data.getText().toString();
+
+        mModelSec1Data = (EditText) findViewById(R.id.modelSec1Data);
+        stringModelSec1Data =  mModelSec1Data.getText().toString();
+
+        mModelSec2Data = (EditText) findViewById(R.id.modelSec2Data);
+        stringModelSec2Data =  mModelSec2Data.getText().toString();
+
+        mModelSec3Data = (EditText) findViewById(R.id.modelSec3Data);
+        stringModelSec3Data =  mModelSec3Data.getText().toString();
+
+        mAntennaHeightSec1Data = (EditText) findViewById(R.id.antennaHeightSec1Data);
+        stringAntennaHeightSec1Data =  mAntennaHeightSec1Data.getText().toString();
+
+        mAntennaHeightSec2Data = (EditText) findViewById(R.id.antennaHeightSec2Data);
+        stringAntennaHeightSec2Data =  mAntennaHeightSec2Data.getText().toString();
+
+        mAntennaHeightSec3Data = (EditText) findViewById(R.id.antennaHeightSec3Data);
+        stringAntennaHeightSec3Data =  mAntennaHeightSec3Data.getText().toString();
+
+
+        intent.putExtra("xtraOriBeforeSec1Data", stringOriBeforeSec1Data);
+        intent.putExtra("xtraOriBeforeSec2Data", stringOriBeforeSec2Data);
+        intent.putExtra("xtraOriBeforeSec3Data", stringOriBeforeSec3Data);
+        intent.putExtra("xtraOriAfterSec1Data", stringOriAfterSec1Data);
+        intent.putExtra("xtraOriAfterSec2Data", stringOriAfterSec2Data);
+        intent.putExtra("xtraOriAfterSec3Data", stringOriAfterSec3Data);
+        intent.putExtra("xtraMechTiltBeforeSec1Data", stringMechTiltBeforeSec1Data);
+        intent.putExtra("xtraMechTiltBeforeSec2Data", stringMechTiltBeforeSec2Data);
+        intent.putExtra("xtraMechTiltBeforeSec3Data", stringMechTiltBeforeSec3Data);
+        intent.putExtra("xtraMechTiltAfterSec1Data", stringMechTiltAfterSec1Data);
+        intent.putExtra("xtraMechTiltAfterSec2Data", stringMechTiltAfterSec2Data);
+        intent.putExtra("xtraMechTiltAfterSec3Data", stringMechTiltAfterSec3Data);
+        intent.putExtra("xtraElecTiltBeforeSec1Data", stringElecTiltBeforeSec1Data);
+        intent.putExtra("xtraElecTiltBeforeSec2Data", stringElecTiltBeforeSec2Data);
+        intent.putExtra("xtraElecTiltBeforeSec3Data", stringElecTiltBeforeSec3Data);
+        intent.putExtra("xtraeElecTiltAfterSec1Data", stringElecTiltAfterSec1Data);
+        intent.putExtra("xtraeElecTiltAfterSec2Data", stringElecTiltAfterSec2Data);
+        intent.putExtra("xtraeElecTiltAfterSec3Data", stringElecTiltAfterSec3Data);
+        intent.putExtra("xtraModelSec1Data", stringModelSec1Data);
+        intent.putExtra("xtraModelSec2Data", stringModelSec2Data);
+        intent.putExtra("xtraModelSec3Data", stringModelSec3Data);
+        intent.putExtra("xtraAntennaHeightSec1Data", stringAntennaHeightSec1Data);
+        intent.putExtra("xtraAntennaHeightSec2Data", stringAntennaHeightSec2Data);
+        intent.putExtra("xtraAntennaHeightSec3Data", stringAntennaHeightSec3Data);
+
+        intent.putExtra("xtraSiteIdData", stringSiteIdData);
+        intent.putExtra("xtraSiteNameData", stringSiteNameData);
+        intent.putExtra("xtraLongitudeData", stringLongitudeData);
+        intent.putExtra("xtraLatitudeData", stringLatitudeData);
+        intent.putExtra("xtraTowerHighData", stringTowerHighData);
+
+        startActivity(intent);
+
+    }
+}
