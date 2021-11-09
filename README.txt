@@ -1,5 +1,6 @@
 -README-
 
+- Buka folder Apps
 - Download file HuaweiDriveTestAssistant.apk pada ponsel, lalu install
 - Versi android minimal Lolipop
 - Apabila tombol open folder pada akhir aplikasi tidak menuju folder tempat file .xlsx tersimpan,
